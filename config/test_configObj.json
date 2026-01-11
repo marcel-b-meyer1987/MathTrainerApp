@@ -1,0 +1,7 @@
+{
+    "maths": {
+        "operators": ["+","-"],
+        "numberSpace": 20,
+        "exercisesPerSet": 20
+    }
+}

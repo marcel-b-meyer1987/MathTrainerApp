@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MathTrainer v. 0.01</title>
+    <link rel="stylesheet" href="./styles/style.css">
+    
+</head>
+<body>
+    <header>
+        <h1>Math Trainer</h1>
+        
+    </header>
+    <main>
+        <section id="start-dialog">
+
+            
+            <fieldset id="base">
+                <legend>Grundeinstellungen</legend>
+                <div>
+                    <label for="number-space">Zahlrenraum bis: </label>
+                    <input type="tel" name="number-space" id="number-space" value="20">
+                </div>  
+                <div>
+                    <label for="number-exercises">Übungen je Set: </label>
+                    <input type="tel" name="number-exercises" id="number-exercises" value="20">
+                </div>
+            </fieldset>
+            <fieldset id="operations">
+                <legend>Operationen</legend>
+                <div>
+                    <input type="checkbox" name="plus" id="plus">
+                    <label for="plus">Plus / +</label>
+                </div>
+                <div>
+                    <input type="checkbox" name="minus" id="minus">
+                    <label for="minus">Minus / -</label>
+                </div>
+                <div>
+                    <input type="checkbox" name="multiply" id="multiply">
+                    <label for="multiply">Mal / x</label>
+                </div>
+                <div>
+                    <input type="checkbox" name="divide" id="divide">
+                    <label for="divide">Geteilt durch / &#247;</label>
+                </div>
+            </fieldset>
+
+            <button class="button">Start</button>
+            <button class="button">Einstellungen Speichern</button>
+        </section>
+
+    </main>
+    <footer>
+        <p>Math Trainer v. 0.0.1</p>
+        <p>&copy; Marcel Meyer 2026</p>
+    </footer>
+
+    <script src="./js/app.js" type="module"></script>
+</body>
+</html>
