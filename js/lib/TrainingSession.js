@@ -6,14 +6,21 @@ export class TrainingSession {
     sets;
     beginTime;
     endTime;
+    startBtn;
 
     constructor(configObj) {
         this.sessionDate = Date();
+        this.startBtn = document.querySelector("#start-button");
 
+        this.startBtn.addEventListener("click", (e) => {
+            e.preventDefault();
+            this.start();
+        });
     }
 
     start() {
         // generate training set based on configObj OR user entry
+        console.log("start training session");
     }
 
     stop() {
