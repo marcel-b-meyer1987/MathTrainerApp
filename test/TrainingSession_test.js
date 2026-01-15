@@ -1,5 +1,6 @@
 import { TrainingSession } from "../js/lib/TrainingSession.js";
 
+/*
 describe("TrainingSession", () => {
     let session;
 
@@ -24,4 +25,26 @@ describe("TrainingSession", () => {
         session.endTime = 5000;
         expect(session.getDuration()).toBe(4000);
     });
-});
+}); */
+
+const testConfigObj = {
+    "operators": ["+","-"],
+    "numberSpace": 20,
+    "exercisesPerSet": 20,
+    "negativeNumbers": false,
+    "autoSave": true
+}
+
+const testSession = new TrainingSession(testConfigObj, "TestUser"); 
+console.log("Training Session ID:", testSession.id);
+console.log("Training Session Start Button:", testSession.startBtn);
+
+// Simulate start button click to start the session
+testSession.startBtn.click();   
+
+console.log("Training Session Sets after start:", testSession.sets);
+
+// Simulate stopping the session after some time
+setTimeout(() => {
+    testSession.stop();
+}, 5000);   

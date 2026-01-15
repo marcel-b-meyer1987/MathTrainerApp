@@ -15,17 +15,24 @@ export class TrainingSession {
         this.id = crypto.randomUUID();
         this.#user = user;
         this.#sessionDate = Date();
-        this.#autoSave = configObj.#autoSave || true;
+        this.#autoSave = configObj.autoSave || true;
         this.sets = [];
         this.startBtn = document.querySelector("#start-button");
+        this.stopBtn = document.querySelector("#stop-button");
 
+        //add event listeners to buttons
         this.startBtn.addEventListener("click", (e) => {
             e.preventDefault();
-            this.start();
+            this.start(configObj);
+        });
+
+        this.stopBtn.addEventListener("click", (e) => {
+            e.preventDefault();
+            this.stop();
         });
     }
 
-    start() {
+    start(configObj) {
         // generate training set based on configObj OR user entry
         this.sets.push(new Set(configObj, this.#user = "Guest"));
         console.log("starting training session");
@@ -48,7 +55,7 @@ export class TrainingSession {
             let durationSeconds = Math.floor(durationMS / 1000);
             let durationMinutes = Math.floor(durationSeconds / 60);
             let durationHours = Math.floor(durationMinutes / 60);
-            this.duration = { hours: durationHours, minutes: durationMinutes % 60, seconds: durationSeconds % 60 };
+            return { hours: durationHours, minutes: durationMinutes % 60, seconds: durationSeconds % 60 };
         } catch (error) {
             console.error("Error calculating session duration:", error);    
         }
