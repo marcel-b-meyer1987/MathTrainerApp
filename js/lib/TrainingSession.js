@@ -1,15 +1,22 @@
 import { Set } from "./Set.js";
 
 export class TrainingSession {
-
-    sessionDate;
+    id;
+    #user;
+    #sessionDate;
+    #autoSave;
     sets;
-    beginTime;
-    endTime;
+    #beginTime;
+    #endTime;
+    duration;
     startBtn;
 
-    constructor(configObj) {
-        this.sessionDate = Date();
+    constructor(configObj, user) {
+        this.id = crypto.randomUUID();
+        this.#user = user;
+        this.#sessionDate = Date();
+        this.#autoSave = configObj.#autoSave || true;
+        this.sets = [];
         this.startBtn = document.querySelector("#start-button");
 
         this.startBtn.addEventListener("click", (e) => {
@@ -20,15 +27,39 @@ export class TrainingSession {
 
     start() {
         // generate training set based on configObj OR user entry
-        console.log("start training session");
+        this.sets.push(new Set(configObj, this.#user = "Guest"));
+        console.log("starting training session");
+        this.#beginTime = Date.now();
     }
 
     stop() {
-        // ask if user wants to save session (if yes, do) + stop it + go back to main menu
+        // ask if user wants to save session (if yes or if #autoSave is true, do) + stop it + go back to main menu
+        if (this.#autoSave || this.checkForSave()) {
+            this.save();
+        }
+        this.#endTime = Date.now();
+        this.duration = this.getDuration();
+        this.showEndScreen();
     }
 
     getDuration() {
-        return this.endTime - this.beginTime;
+        try {
+            let durationMS = this.#endTime - this.#beginTime;
+            let durationSeconds = Math.floor(durationMS / 1000);
+            let durationMinutes = Math.floor(durationSeconds / 60);
+            let durationHours = Math.floor(durationMinutes / 60);
+            this.duration = { hours: durationHours, minutes: durationMinutes % 60, seconds: durationSeconds % 60 };
+        } catch (error) {
+            console.error("Error calculating session duration:", error);    
+        }
+    }
+
+    checkForSave() {
+        // check if session should be saved based on user input
+        if (confirm("Do you want to save your training session?")) {
+            return true;
+        }
+        return false;
     }
 
     save() {
@@ -39,4 +70,11 @@ export class TrainingSession {
         // load a formerly saved training session for completion or review
     }
 
+    showEndScreen() {
+        // display the end screen with session details
+        // e.g., duration, score, options to save or start a new session
+
+        // for now, just log the duration
+        console.log(`Training session ended. Duration: ${this.duration.hours}:${this.duration.minutes}:${this.duration.seconds} (h:m:s)`);
+    }
 }

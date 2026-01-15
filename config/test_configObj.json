@@ -1,7 +1,9 @@
-{
-    "maths": {
-        "operators": ["+","-"],
-        "numberSpace": 20,
-        "exercisesPerSet": 20
-    }
+
+const testConfigObj = {
+    "operators": ["+","-"],
+    "numberSpace": 20,
+    "exercisesPerSet": 20,
+    "negativeNumbers": false,
+    "autoSave": true
 }
+export default testConfigObj;
