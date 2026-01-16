@@ -15,7 +15,18 @@
     <main>
         <section id="start-dialog">
 
-            
+            <fieldset id="user-settings">
+                <legend>Benutzereinstellungen</legend>
+                <div>
+                    <label for="username">Benutzername:</label>
+                    <input type="text" id="username" name="username" value="Gast">
+                </div>
+                <div>
+                    <label for="age">Alter:</label>
+                    <input type="tel" id="age" name="age" min="1" max="120">
+                </div>
+            </fieldset>
+
             <fieldset id="base">
                 <legend>Grundeinstellungen</legend>
                 <div>
@@ -26,6 +37,15 @@
                     <label for="number-exercises">Übungen je Set: </label>
                     <input type="tel" name="number-exercises" id="number-exercises" value="20">
                 </div>
+                <div>
+                    <label for="autosave">Automatisch Speichern:</label>
+                    <input type="checkbox" id="autosave" name="autosave" checked>
+                <!-- </div>
+                <div> -->
+                    <label for="negative-numbers">Negative Ergebnisse:</label>
+                    <input type="checkbox" id="negative-numbers" name="negative-numbers">
+                </div>
+                
             </fieldset>
             <fieldset id="operations">
                 <legend>Operationen</legend>

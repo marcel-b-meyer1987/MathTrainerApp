@@ -23,7 +23,8 @@ export class TrainingSession {
         //add event listeners to buttons
         this.startBtn.addEventListener("click", (e) => {
             e.preventDefault();
-            this.start(configObj);
+            const newConfig = this.updateConfig();
+            this.start(newConfig);
         });
 
         this.stopBtn.addEventListener("click", (e) => {
@@ -31,6 +32,24 @@ export class TrainingSession {
             this.stop();
         });
     }
+
+    updateConfig() {
+        // load configuration from user input in the settings form
+        const config = {
+            numberSpace: document.getElementById("number-space").value,
+            numberExercises: document.getElementById("number-exercises").value,
+            autoSave: document.getElementById("autosave").checked,
+            negativeNumbers: document.getElementById("negative-numbers").checked
+        };
+        return config;
+    }
+
+    saveConfig(config) {
+        // save configuration to local storage for future sessions
+        localStorage.setItem(`MathTrainer_${this.#user}_config`, JSON.stringify(config));
+    }
+
+
 
     start(configObj) {
         // generate training set based on configObj OR user entry

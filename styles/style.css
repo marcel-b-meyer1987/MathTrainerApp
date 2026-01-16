@@ -63,6 +63,10 @@ h1 {
     color: var(--secondary-color);
 }
 
+input {
+    font-size: 1.2rem;
+}
+
 fieldset {
     margin-bottom: 1rem;
     padding: 0.75rem 1rem 1.25rem 1rem;
@@ -89,7 +93,8 @@ fieldset > legend {
 fieldset#base > div {
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
+    column-gap: 0.75rem;
+    row-gap: 1rem;
 }
 
 #base > label {
@@ -99,7 +104,6 @@ fieldset#base > div {
 #base input {
     grid-column: 2/3;
     padding: 4px;
-    font-size: 1.2rem;
 }
 
 footer {
