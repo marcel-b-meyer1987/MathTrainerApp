@@ -1,5 +1,13 @@
 import { Set } from "./Set.js";
 
+const dummyConfigObj = {
+    "operators": ["+","-"],
+    "numberSpace": 20,
+    "exercisesPerSet": 20,
+    "negativeNumbers": false,
+    "autoSave": true
+}
+
 export class TrainingSession {
     id;
     #user;
@@ -11,7 +19,7 @@ export class TrainingSession {
     duration;
     startBtn;
 
-    constructor(configObj, user) {
+    constructor(configObj = dummyConfigObj, user = "Gast") {
         this.id = crypto.randomUUID();
         this.#user = user;
         this.#sessionDate = Date();
@@ -34,12 +42,28 @@ export class TrainingSession {
     }
 
     updateConfig() {
+        /* MUST BE FIXED LATER
         // load configuration from user input in the settings form
+        let operators = [];
+        document.querySelectorAll('input[name="operation"]:checked').forEach((checkbox) => {
+            operators.push(checkbox.id);
+        });
         const config = {
+            operators: operators,
             numberSpace: document.getElementById("number-space").value,
             numberExercises: document.getElementById("number-exercises").value,
             autoSave: document.getElementById("autosave").checked,
             negativeNumbers: document.getElementById("negative-numbers").checked
+        };
+        return config;
+        */
+        // temporary fixed config for testing
+        const config = {
+            operators: ["+","-"],
+            numberSpace: 20,
+            exercisesPerSet: 20,
+            autoSave: true,
+            negativeNumbers: false
         };
         return config;
     }
@@ -56,10 +80,12 @@ export class TrainingSession {
         this.sets.push(new Set(configObj, this.#user = "Guest"));
         console.log("starting training session");
         this.#beginTime = Date.now();
+        // display first set of exercises to the user - now log to console for testing
+        console.log("Training Session Sets:", this.sets);
     }
 
     stop() {
-        // ask if user wants to save session (if yes or if #autoSave is true, do) + stop it + go back to main menu
+        // ask if user wants to save session (if yes or if #autoSave is true, do) + stop it + go back to end screen / main menu
         if (this.#autoSave || this.checkForSave()) {
             this.save();
         }
