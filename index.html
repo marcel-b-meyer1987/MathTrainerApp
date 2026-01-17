@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MathTrainer v. 0.01</title>
     <link rel="stylesheet" href="./styles/style.css">
+
+    <link rel="shortcut icon" href="./img/favicon_light.ico" type="image/x-icon">
     
 </head>
 <body>
@@ -21,15 +23,26 @@
                 <li id="login-link">Login</li>
             </ul>
         </nav>
-        <h1>Math Trainer</h1>    
+        <div class="logo-section">
+            <h1>Mathe-Trainer</h1>
+            <img src="./img/logo_dark_192x192.png" alt="Mathe-Trainer" class="logo">
+        </div>
     </header>
 
     <main>
 
+        <!-- =================== SPLASH SCREEN SECTION ================== -->
+
+        <section id="splash-screen-section">
+            <img src="./img/logo_dark_512x512.png" alt="Mathe-Trainer Logo" class="splash-logo">
+            <h2>Willkommen zum Mathe-Trainer!</h2>
+            <p>Bitte wähle eine Option aus dem Menü, um zu beginnen.</p>
+        </section>
+
         <!-- ===================== SETTINGS SECTION =====================-->
 
         <section id="settings-section" class="hidden">
-
+            <h2>Einstellungen</h2>
             <fieldset id="user-settings">
                 <legend>Benutzereinstellungen</legend>
                 <div>
@@ -88,6 +101,7 @@
         <!-- ===================== TRAINING SECTION =====================-->
 
         <section id="training-section" class="hidden">
+            <h2>Training</h2>
             <button class="button" id="start-button">Start</button>
             <button class="button" id="stop-button">Stop</button>
         </section>

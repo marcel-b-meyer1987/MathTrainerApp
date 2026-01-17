@@ -4,6 +4,7 @@ import { User } from "./lib/User.js";
 //main app logic comes here
 
 //hook up sections
+const splashScreenSection = document.querySelector("#splash-screen-section");
 const settingsSection = document.querySelector("#settings-section");
 const trainingSection = document.querySelector("#training-section");
 const statsSection = document.querySelector("#stats-section");
@@ -11,6 +12,7 @@ const helpSection = document.querySelector("#help-section");
 const loginSection = document.querySelector("#login-section");
 
 const allSections = Array.from([
+    splashScreenSection,
     settingsSection,
     trainingSection,
     statsSection,
