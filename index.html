@@ -8,12 +8,27 @@
     
 </head>
 <body>
+
+    <!-- ===================== HEADER + NAVIGATION =====================-->
+
     <header>
-        <h1>Math Trainer</h1>
-        
+        <nav>
+            <ul>
+                <li id="settings-link">Einstellungen</li>
+                <li id="training-link">Training</li>
+                <li id="stats-link">Statistiken</li>
+                <li id="help-link">Hilfe</li>
+                <li id="login-link">Login</li>
+            </ul>
+        </nav>
+        <h1>Math Trainer</h1>    
     </header>
+
     <main>
-        <section id="start-dialog">
+
+        <!-- ===================== SETTINGS SECTION =====================-->
+
+        <section id="settings-section" class="hidden">
 
             <fieldset id="user-settings">
                 <legend>Benutzereinstellungen</legend>
@@ -67,10 +82,36 @@
                 </div>
             </fieldset>
 
-            <button class="button" id="start-button">Start</button>
-            <button class="button" id="stop-button">Stop</button>
             <button class="button" id="save-settings-button">Einstellungen Speichern</button>
         </section>
+        
+        <!-- ===================== TRAINING SECTION =====================-->
+
+        <section id="training-section" class="hidden">
+            <button class="button" id="start-button">Start</button>
+            <button class="button" id="stop-button">Stop</button>
+        </section>
+
+        <!-- ===================== STATS SECTION =====================-->
+        
+        <section id="stats-section" class="hidden">
+            <h2>Statistiken</h2>
+            <!-- Stats content goes here -->
+        </section>
+        
+        <!-- ===================== HELP SECTION =====================-->
+        
+        <section id="help-section" class="hidden">
+            <h2>Hilfe</h2>
+            <!-- Help content goes here -->
+        </section>
+
+        <!-- ===================== LOGIN SECTION =====================-->
+        
+        <section id="login-section" class="hidden">
+            <h2>Login</h2>
+            <!-- Login content goes here -->
+        </section>      
 
     </main>
     <footer>

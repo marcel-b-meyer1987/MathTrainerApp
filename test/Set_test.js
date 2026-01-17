@@ -4,7 +4,8 @@ const testConfigObj = {
     "operators": ["+","-"],
     "numberSpace": 20,
     "exercisesPerSet": 20,
-    "negativeNumbers": false
+    "negativeNumbers": false,
+    "autoSave": true
 }
 
 /*

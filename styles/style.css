@@ -18,6 +18,43 @@ body {
     letter-spacing: 0.05ch;
 }
 
+.hidden {
+    display: none;
+}
+
+header {
+    padding: 1rem;
+    text-align: center;
+    border-bottom: 2px solid var(--secondary-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;    
+
+}
+
+header > nav > ul{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    flex-grow: 1;
+    gap: 2.5rem;
+    list-style: none;
+    margin: 0 1rem;
+    padding: 1rem 2rem
+}
+
+header li {
+    cursor: pointer;
+    transition: all 30ms ease-out; 
+    font-weight: 600;
+}
+
+header li:hover {
+    color: var(--accent-color);
+    translate: 0 -0.25rem;
+}
+
 main {
     padding: 1rem;
     display: flex;
@@ -28,7 +65,7 @@ main {
 }
 
 h1 {
-    margin-bottom: 2rem;
+   
     text-align: center;
 }
 

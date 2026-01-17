@@ -28,6 +28,7 @@ export class TrainingSession {
         this.startBtn = document.querySelector("#start-button");
         this.stopBtn = document.querySelector("#stop-button");
 
+        /* I believe these event listeners are better placed in app.js, outside the object instance
         //add event listeners to buttons
         this.startBtn.addEventListener("click", (e) => {
             e.preventDefault();
@@ -38,7 +39,7 @@ export class TrainingSession {
         this.stopBtn.addEventListener("click", (e) => {
             e.preventDefault();
             this.stop();
-        });
+        }); */
     }
 
     updateConfig() {
