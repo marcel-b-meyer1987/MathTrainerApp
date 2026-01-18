@@ -120,6 +120,16 @@ export class Set {
                 <p>Benötigte Zeit: ${totalTime} Sekunden</p>
             </div>
         `;
+
+        const btn = document.getElementById("start-stop-button");
+        btn.innerText = "Nochmal";  
+
+        btn.addEventListener("click", (e) => {
+            e.preventDefault();
+            //reset set for another round
+            this.status = "completed";
+            return this.status;
+        });
         // alert(`Set abgeschlossen!\nRichtige Lösungen: ${correctSolutions} von ${this.exercises.length}\nBenötigte Zeit: ${totalTime} Sekunden`);
     }
 
