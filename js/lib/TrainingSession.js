@@ -10,14 +10,15 @@ const dummyConfigObj = {
 
 export class TrainingSession {
     id;
+    isActive = false;
     #user;
     #sessionDate;
     #autoSave;
     sets;
+    #setIndex;
     #beginTime;
     #endTime;
     duration;
-    startBtn;
 
     constructor(configObj = dummyConfigObj, user = "Gast") {
         this.id = crypto.randomUUID();
@@ -25,21 +26,13 @@ export class TrainingSession {
         this.#sessionDate = Date();
         this.#autoSave = configObj.autoSave || true;
         this.sets = [];
-        this.startBtn = document.querySelector("#start-button");
-        this.stopBtn = document.querySelector("#stop-button");
+        this.#setIndex = 0;
+        
+    }
 
-        /* I believe these event listeners are better placed in app.js, outside the object instance
-        //add event listeners to buttons
-        this.startBtn.addEventListener("click", (e) => {
-            e.preventDefault();
-            const newConfig = this.updateConfig();
-            this.start(newConfig);
-        });
-
-        this.stopBtn.addEventListener("click", (e) => {
-            e.preventDefault();
-            this.stop();
-        }); */
+    loadConfig() {
+        // load configuration from local storage if available, else return default config
+        return JSON.parse(localStorage.getItem(`MathTrainer_${this.#user}_config`)) || dummyConfigObj;
     }
 
     updateConfig() {
@@ -76,23 +69,56 @@ export class TrainingSession {
 
 
 
-    start(configObj) {
+    async start(configObj) {
+        this.isActive = true;
+        
         // generate training set based on configObj OR user entry
         this.sets.push(new Set(configObj, this.#user = "Guest"));
+        this.#setIndex = this.sets.length - 1;
         console.log("starting training session");
         this.#beginTime = Date.now();
-        // display first set of exercises to the user - now log to console for testing
+        
+        // display first set of exercises to the user + now log to console for testing
         console.log("Training Session Sets:", this.sets);
+        this.activateExerciseDisplay();
+
+        // remove welcome text above exercise display
+        document.getElementById("exercise-welcome-msg").classList.add("hidden");
+
+        await this.sets[this.#setIndex].do().then((result) => {
+            this.stop(result);
+        });
     }
 
-    stop() {
+    activateExerciseDisplay() {
+        // show exercise display section + hide other sections
+        document.getElementById("exercise-display").innerHTML = `
+            <span id="exercise-welcome-msg">Drücke "Start", um zu beginnen!</span>
+                <fieldset id="exercise-details">
+                    <legend></legend>
+                    <div class="outer-container">
+                        <div class="inner-container">
+                            <span id="exercise"></span>
+                            <input type="tel" id="solution-input" autocomplete="off">
+                        </div>
+                        <div class="inner-container">
+                            <button id="submit-solution-button" class="submit-button">Weiter</button>
+                        </div>
+                    </div>
+                </fieldset>`;
+    }
+
+    stop(reason) {
+        this.isActive = false;
+        console.log("stopping training session due to:", reason);
         // ask if user wants to save session (if yes or if #autoSave is true, do) + stop it + go back to end screen / main menu
         if (this.#autoSave || this.checkForSave()) {
             this.save();
         }
         this.#endTime = Date.now();
         this.duration = this.getDuration();
-        this.showEndScreen();
+        console.log("stopping training session after", this.duration, "(h:m:s).");
+        this.showEndScreen(reason);
     }
 
     getDuration() {
@@ -129,5 +155,13 @@ export class TrainingSession {
 
         // for now, just log the duration
         console.log(`Training session ended. Duration: ${this.duration.hours}:${this.duration.minutes}:${this.duration.seconds} (h:m:s)`);
+
+        // clear exercise display
+        document.getElementById("exercise-display").innerHTML = `
+            <div id="end-screen">
+                <h2>Übungsreihe beendet</h2>
+                <p>Dauer: ${this.duration.hours}:${this.duration.minutes}:${this.duration.seconds} (h:m:s).</p>
+            </div>
+        `;    
     }
 }

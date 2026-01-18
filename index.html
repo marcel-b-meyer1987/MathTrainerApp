@@ -39,71 +39,107 @@
             <p>Bitte wähle eine Option aus dem Menü, um zu beginnen.</p>
         </section>
 
-        <!-- ===================== SETTINGS SECTION =====================-->
+        <!-- ===================== SETTINGS SECTION ===================== -->
 
         <section id="settings-section" class="hidden">
             <h2>Einstellungen</h2>
-            <fieldset id="user-settings">
-                <legend>Benutzereinstellungen</legend>
-                <div>
-                    <label for="username">Benutzername:</label>
-                    <input type="text" id="username" name="username" value="Gast">
-                </div>
-                <div>
-                    <label for="age">Alter:</label>
-                    <input type="tel" id="age" name="age" min="1" max="120">
-                </div>
-            </fieldset>
+            <form action="" id="settings-form">
+                <fieldset id="user-settings">
+                    <legend>Benutzereinstellungen</legend>
+                    <div class="text-settings">
+                        <label for="username">Benutzername:</label>
+                        <input type="text" id="username" name="username" value="Gast">
 
-            <fieldset id="base">
-                <legend>Grundeinstellungen</legend>
-                <div>
-                    <label for="number-space">Zahlrenraum bis: </label>
-                    <input type="tel" name="number-space" id="number-space" value="20">
-                </div>  
-                <div>
-                    <label for="number-exercises">Übungen je Set: </label>
-                    <input type="tel" name="number-exercises" id="number-exercises" value="20">
-                </div>
-                <div>
-                    <label for="autosave">Automatisch Speichern:</label>
-                    <input type="checkbox" id="autosave" name="autosave" checked>
-                <!-- </div>
-                <div> -->
-                    <label for="negative-numbers">Negative Ergebnisse:</label>
-                    <input type="checkbox" id="negative-numbers" name="negative-numbers">
-                </div>
-                
-            </fieldset>
-            <fieldset id="operations">
-                <legend>Operationen</legend>
-                <div>
-                    <input type="checkbox" name="operation" id="+">
-                    <label for="plus">Plus / +</label>
-                </div>
-                <div>
-                    <input type="checkbox" name="operation" id="-">
-                    <label for="minus">Minus / -</label>
-                </div>
-                <div>
-                    <input type="checkbox" name="operation" id="*">
-                    <label for="multiply">Mal / x</label>
-                </div>
-                <div>
-                    <input type="checkbox" name="operation" id="/">
-                    <label for="divide">Geteilt durch / &#247;</label>
-                </div>
-            </fieldset>
+                        <label for="age">Alter:</label>
+                        <input type="tel" id="age" name="age" min="1" max="120">
+                    </div>
+                    
+                    <div>
+                        <div>
+                            <input type="checkbox" id="dark-mode" name="dark-mode">
+                            <label for="dark-mode">Dunkler Modus</label>
+                        </div>
 
-            <button class="button" id="save-settings-button">Einstellungen Speichern</button>
+                        <div>
+                            <input type="checkbox" id="autosave" name="autosave" checked>
+                            <label for="autosave">Automatisch Speichern</label>
+                        </div>
+                    </div>
+                    
+                </fieldset>
+
+                <fieldset id="exercise-settings">
+                    <legend>Übungsparameter</legend>
+                    <div class="text-settings">
+                        <label for="number-space">Zahlrenraum bis: </label>
+                        <input type="tel" name="number-space" id="number-space" value="20">
+
+                        <label for="number-exercises">Übungen je Reihe: </label>
+                        <input type="tel" name="number-exercises" id="number-exercises" value="20">
+                    </div>
+                    
+                    <div>
+                        <input type="checkbox" id="negative-numbers" name="negative-numbers">
+                        <label for="negative-numbers">Negative Ergebnisse</label>
+                    </div>
+                    
+                </fieldset>
+                <fieldset id="operations">
+                    <legend>Operationen</legend>
+                    <div>
+                        <input type="checkbox" name="operation" id="+">
+                        <label for="+">Plus / +</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" name="operation" id="-">
+                        <label for="-">Minus / -</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" name="operation" id="*">
+                        <label for="*">Mal / x</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" name="operation" id="/">
+                        <label for="/">Geteilt durch / &#247;</label>
+                    </div>
+                </fieldset>
+
+                <fieldset id="other">
+                    <legend>Sonstiges</legend>
+                        <div>
+                            <input type="checkbox" name="timer" id="timer">
+                            <label for="timer">Timer anzeigen</label>
+                        </div>
+                </fieldset>
+
+                <button class="button" id="save-settings-button">Einstellungen Speichern</button>
+            </form>
         </section>
         
         <!-- ===================== TRAINING SECTION =====================-->
 
         <section id="training-section" class="hidden">
             <h2>Training</h2>
-            <button class="button" id="start-button">Start</button>
-            <button class="button" id="stop-button">Stop</button>
+
+            <div id="exercise-display">
+                <span id="exercise-welcome-msg">Drücke "Start", um zu beginnen!</span>
+                <!-- <fieldset id="exercise-details">
+                    <legend>Aufgabe 1 von 20</legend>
+                    <div class="outer-container">
+                        <div class="inner-container">
+                            <span id="exercise">15 + 5 = </span>
+                            <input type="tel" id="solution-input" autocomplete="off">
+                        </div>
+                        <div class="inner-container">
+                            <button id="submit-solution-button" class="submit-button">Weiter</button>
+                        </div>
+                    </div>
+                </fieldset> -->
+            </div>
+
+            <div id="session-control">
+                <button class="button" id="start-stop-button">Start</button>
+            </div>
         </section>
 
         <!-- ===================== STATS SECTION =====================-->

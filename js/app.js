@@ -1,7 +1,10 @@
 import { TrainingSession } from "./lib/TrainingSession.js";
 import { User } from "./lib/User.js";
 
+//ROBERT MEYER
+
 //main app logic comes here
+const session = new TrainingSession();
 
 //hook up sections
 const splashScreenSection = document.querySelector("#splash-screen-section");
@@ -55,25 +58,53 @@ loginLink.addEventListener("click", (e) => {
 
 //============================== SETTINGS SECTION ============================//
 
-//...
+//hook up settings form + add event listener to save button
+const settingsForm = document.querySelector("#settings-form");
+const saveSettingsBtn = document.querySelector("#save-settings-button");
+
+saveSettingsBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    const formData = new FormData(settingsForm);
+    const username = formData.get("username");
+    const age = parseInt(formData.get("age"));
+    const darkMode = formData.get("dark-mode") === "on" ? true : false;
+    const autoSave = formData.get("auto-save") === "on" ? true : false;
+    const numberSpace = parseInt(formData.get("number-space"));
+    const numberExercises = parseInt(formData.get("number-exercises"));
+    const allowNegative = formData.get("allow-negative") === "on" ? true : false;
+    const operations = formData.getAll("operations");
+    const timerEnabled = formData.get("timer") === "on" ? true : false;
+
+    //... save settings logic here ...
+    console.log("Username:", username);
+    console.log("Age:", age);
+    console.log("Dark Mode:", darkMode);
+    console.log("Auto Save:", autoSave);
+    console.log("Number Space:", numberSpace);
+    console.log("Number of Exercises:", numberExercises);
+    console.log("Allow Negative:", allowNegative);
+    console.log("Operations:", operations);
+    console.log("Timer Enabled:", timerEnabled);
+    console.log("Settings saved:");
+});
 
 //============================== TRAINING SECTION ============================//
 
 //hook up buttons + add event listeners to them
-const startBtn = document.querySelector("#start-button");
-const stopBtn = document.querySelector("#stop-button");
+const startStopBtn = document.querySelector("#start-stop-button");
 
-startBtn.addEventListener("click", (e) => {
+startStopBtn.addEventListener("click", (e) => {
     e.preventDefault();
-    session = new TrainingSession();
-    const newConfig = session.updateConfig();
-    session.start(newConfig);
+    if (!session.isActive) {
+        let config = session.loadConfig();
+        session.start(config);
+        startStopBtn.innerText = "Abbrechen";
+    } else {
+        session.stop();
+        startStopBtn.innerText = "Start";
+    }
 });
 
-stopBtn.addEventListener("click", (e) => {
-    e.preventDefault();
-    session.stop();
-});
 
 //============================== STATS SECTION ============================//
 

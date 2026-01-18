@@ -18,6 +18,11 @@ export class Exercise {
         this.solutionCorrect = undefined;
     }
 
+    toString() {
+        //return string representation of the exercise
+        return `${this.operand1} ${this.operator} ${this.operand2} = `;
+    }
+
     getSolution() {
         //compute + return the solution of the exercise
         switch (this.operator) {

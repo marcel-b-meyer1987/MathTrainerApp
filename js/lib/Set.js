@@ -3,14 +3,24 @@ import { Exercise } from "./Exercise.js"
 export class Set {
     // Set of exercises
     id;
+    status; // pending, active, completed, aborted
     exercises; // array containing Exercise objects
+    exerciseIndex // to track the current exercise in the set
     timerStart; // to measure the time needed for the set
     timerEnd; // to measure the time needed for the set
 
+    solutionInput;
+    submitSolutionBtn;
+    abortBtn;
+
     constructor(configObj, user) {
         this.id = crypto.randomUUID();
+        this.status = "pending";
         this.exercises = this.generateExercises(configObj);
         this.timerStart = Date.now();
+        this.exerciseIndex = 0;
+
+
     }
 
     generateExercises(config) {
@@ -38,7 +48,84 @@ export class Set {
         return exercisesArray;
     }
 
-    save(user) {
+    do() {
+        //hook up DOM elements
+        this.solutionInput = document.getElementById("solution-input");
+        this.submitSolutionBtn = document.getElementById("submit-solution-button");
+        this.abortBtn = document.getElementById("start-stop-button");
+
+        // set up event listener for solution submission
+        this.submitSolutionBtn.addEventListener("click", (e) => {
+            e.preventDefault();
+            let userSolution = parseFloat(this.solutionInput.value);
+            let currentExercise = this.exercises[this.exerciseIndex - 1];
+            currentExercise.enterSolution(userSolution);
+            this.solutionInput.value = "";
+
+            //show next exercise or end of set
+            if (this.exerciseIndex < this.exercises.length) {
+                this.showNextExercise(this.exerciseIndex);
+            } else {
+                this.status = "completed";
+                this.timerEnd = Date.now();
+                console.log("Set completed in", (this.timerEnd - this.timerStart) / 1000, "seconds");
+                //show end of set screen + stats
+                this.showEndStats();
+                return this.status;
+            }
+        });
+
+        // set up event listener for aborting the set
+        this.abortBtn.addEventListener("click", (e) => {
+            e.preventDefault();
+            if (this.status === "active") {
+                return this.abort();
+            }
+        });
+
+
+        // start doing the set of exercises
+        this.status = "active";
+        this.showNextExercise(this.exerciseIndex);
+    }
+
+    showNextExercise(exerciseIndex) {
+        // display the next exercise in the set
+        let exercise = this.exercises[exerciseIndex];
+        document.querySelector("#exercise-details > legend").innerText = `Aufgabe ${exerciseIndex + 1} von ${this.exercises.length}`;
+        document.getElementById("exercise").innerText = exercise.toString();
+        this.exerciseIndex++;
+        this.solutionInput.focus();
+    }
+
+    abort() {
+        //abort the set + log time spent + exercises done
+        this.status = "aborted";
+        this.timerEnd = Date.now();
+        console.log("Set aborted after", (this.timerEnd - this.timerStart) / 1000, "seconds");
+        return this.status;
+    }
+
+    showEndStats() {
+        // display end of set stats to the user
+        let correctSolutions = this.exercises.filter(ex => ex.solutionCorrect).length;
+        let totalTime = (this.timerEnd - this.timerStart) / 1000; // in seconds
+
+        const display = document.getElementById("exercise-display");
+        display.innerHTML = `
+            <div id="end-set-screen">
+                <h2>Herzlichen Glückwunsch!</h2>
+                <p>Übungsreihe abgeschlossen</p>
+                <p>Richtige Lösungen: ${correctSolutions} von ${this.exercises.length}</p>
+                <p>Benötigte Zeit: ${totalTime} Sekunden</p>
+            </div>
+        `;
+        // alert(`Set abgeschlossen!\nRichtige Lösungen: ${correctSolutions} von ${this.exercises.length}\nBenötigte Zeit: ${totalTime} Sekunden`);
+    }
+
+
+
+    saveSet(user) {
         // save the set for later review in the user's account
     }
 
