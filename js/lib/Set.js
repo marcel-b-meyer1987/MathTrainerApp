@@ -13,10 +13,10 @@ export class Set {
     submitSolutionBtn;
     abortBtn;
 
-    constructor(configObj, user) {
+    constructor(user) {
         this.id = crypto.randomUUID();
         this.status = "pending";
-        this.exercises = this.generateExercises(configObj);
+        this.exercises = this.generateExercises(user.config);
         this.timerStart = Date.now();
         this.exerciseIndex = 0;
 
@@ -68,7 +68,7 @@ export class Set {
             } else {
                 this.status = "completed";
                 this.timerEnd = Date.now();
-                console.log("Set completed in", (this.timerEnd - this.timerStart) / 1000, "seconds");
+                console.log("Set completed in", this.finishingTime(), "(mm:ss)");
                 //show end of set screen + stats
                 this.showEndStats();
                 return this.status;
@@ -98,13 +98,24 @@ export class Set {
         this.solutionInput.focus();
     }
 
+    finishingTime(format) {
+        
+        if (format === "seconds") return (this.timerEnd - this.timerStart) / 1000; // in seconds
+
+        // if not specifically asked for seconds, return in the format "minutes:seconds"
+        return `${Math.floor((this.timerEnd - this.timerStart) / 60000)}:${Math.floor(((this.timerEnd - this.timerStart) % 60000) / 1000)}`; // in minutes
+    }
+
+    
     abort() {
         //abort the set + log time spent + exercises done
         this.status = "aborted";
         this.timerEnd = Date.now();
-        console.log("Set aborted after", (this.timerEnd - this.timerStart) / 1000, "seconds");
+        console.log("Set aborted after", this.finishingTime(), "seconds");
         return this.status;
     }
+
+
 
     showEndStats() {
         // display end of set stats to the user
@@ -117,7 +128,7 @@ export class Set {
                 <h2>Herzlichen Glückwunsch!</h2>
                 <p>Übungsreihe abgeschlossen</p>
                 <p>Richtige Lösungen: ${correctSolutions} von ${this.exercises.length}</p>
-                <p>Benötigte Zeit: ${totalTime} Sekunden</p>
+                <p>Benötigte Zeit: ${this.finishingTime()} (mm:ss)</p>
             </div>
         `;
 

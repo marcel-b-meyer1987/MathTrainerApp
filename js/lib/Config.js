@@ -6,7 +6,7 @@ export class Config {
     autoSave;
     showTimer;
 
-    constructor(operators, numberSpace, exercisesPerSet, allowNegativeNumbers, autoSave = true, showTimer = false) {
+    constructor(operators = ["+"], numberSpace = 10, exercisesPerSet = 20, allowNegativeNumbers = false, autoSave = true, showTimer = false) {
         this.operators = operators; // array of operators, e.g. ["+", "-", "*", "/"]
         this.numberSpace = numberSpace; // maximum number for operands
         this.exercisesPerSet = exercisesPerSet; // number of exercises per set
@@ -49,7 +49,7 @@ export class Config {
 
 export const defaultConfig = new Config(
     ["+"],
-    
+    10,
     20,
     false,
     true,
