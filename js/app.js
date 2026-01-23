@@ -4,7 +4,7 @@ import { User } from "./lib/User.js";
 //ROBERT MEYER
 
 //main app logic comes here
-const session = new TrainingSession();
+let session = new TrainingSession();
 
 //hook up sections
 const splashScreenSection = document.querySelector("#splash-screen-section");
@@ -54,6 +54,7 @@ helpLink.addEventListener("click", (e) => {
 loginLink.addEventListener("click", (e) => {
     loginSection.classList.remove("hidden");
     allSections.filter(sec => sec !== loginSection).forEach(sec => sec.classList.add("hidden"));
+    loginSection.querySelector("#username").focus();
 });
 
 //============================== SETTINGS SECTION ============================//
@@ -116,6 +117,38 @@ startStopBtn.addEventListener("click", (e) => {
 
 //============================== LOGIN SECTION ============================//
 
+// hook up login form + add event listener to login button
+const loginForm = document.querySelector("#login-form");
+const loginButton = document.querySelector("#login-button");
+
+loginButton.addEventListener("click", (e) => {
+    e.preventDefault();
+    const formData = new FormData(loginForm);
+    const username = formData.get("username");
+    const password = formData.get("password");
+
+    // ... login logic here ...
+    // console.log("Logging in with:");
+    // console.log("Username:", username);
+    // console.log("Password:", password);
+
+    check if the user exists in localStorage
+    const userExists = localStorage.getItem(`MathTrainer_${username}_config`);
+
+    if (userExists) {
+        console.log(`User ${username} found. Logging in...`);
+        // generate new user object with loaded config  
+        const user = new User(username, password, new Config().loadFromStorage(username));
+        console.log("User object:", user);
+        console.log("Loaded user config:", user.config);
+        // proceed to training section
+        trainingSection.classList.remove("hidden");
+        allSections.filter(sec => sec !== trainingSection).forEach(sec => sec.classList.add("hidden"));
+    } else {
+        console.log(`User ${username} not found. Please register first.`);
+        // Optionally, show an error message to the user
+    }
+}
 //...
 
 

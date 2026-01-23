@@ -1,4 +1,5 @@
 import { Set } from "./Set.js";
+import { User } from "./User.js";
 
 const dummyConfigObj = {
     "operators": ["+","-"],
@@ -10,7 +11,7 @@ const dummyConfigObj = {
 
 export class TrainingSession {
     id;
-    isActive = false;
+    #isActive;
     #user;
     #sessionDate;
     #autoSave;
@@ -21,6 +22,7 @@ export class TrainingSession {
     duration;
 
     constructor(configObj = dummyConfigObj, user = "Gast") {
+        this.#isActive = false;
         this.id = crypto.randomUUID();
         this.#user = user;
         this.#sessionDate = Date();

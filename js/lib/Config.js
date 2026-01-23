@@ -1,4 +1,6 @@
 export class Config {
+    username;
+    password;
     operators;
     numberSpace;
     exercisesPerSet;
@@ -6,7 +8,9 @@ export class Config {
     autoSave;
     showTimer;
 
-    constructor(operators = ["+"], numberSpace = 10, exercisesPerSet = 20, allowNegativeNumbers = false, autoSave = true, showTimer = false) {
+    constructor(username, password, operators = ["+"], numberSpace = 10, exercisesPerSet = 20, allowNegativeNumbers = false, autoSave = true, showTimer = false) {
+        this.username = username;
+        this.password = password;
         this.operators = operators; // array of operators, e.g. ["+", "-", "*", "/"]
         this.numberSpace = numberSpace; // maximum number for operands
         this.exercisesPerSet = exercisesPerSet; // number of exercises per set
@@ -16,6 +20,8 @@ export class Config {
     }
 
     loadFromObject(configObj) {
+        this.username = configObj.username;
+        this.password = configObj.password;
         this.operators = configObj.operators;
         this.numberSpace = configObj.numberSpace;
         this.exercisesPerSet = configObj.exercisesPerSet;
@@ -26,6 +32,8 @@ export class Config {
 
     toObject() {
         return {
+            username: this.username,
+            password: this.password,
             operators: this.operators,
             numberSpace: this.numberSpace,
             exercisesPerSet: this.exercisesPerSet,

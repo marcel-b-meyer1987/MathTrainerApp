@@ -48,7 +48,7 @@
                     <legend>Benutzereinstellungen</legend>
                     <div class="text-settings">
                         <label for="username">Benutzername:</label>
-                        <input type="text" id="username" name="username" value="Gast">
+                        <input type="text" id="username" name="username" value="Gast" readonly>
 
                         <label for="age">Alter:</label>
                         <input type="tel" id="age" name="age" min="1" max="120">
@@ -160,7 +160,21 @@
         
         <section id="login-section" class="hidden">
             <h2>Login</h2>
-            <!-- Login content goes here -->
+            <form action="" id="login-form">
+                <fieldset id="login-data">
+                    <legend>Benutzereinstellungen</legend>
+                    <div class="text-settings">
+                        <label for="username">Benutzername:</label>
+                        <input type="text" id="username" name="username" placeholder="Gast">
+
+                        <label for="password">Passwort:</label>
+                        <input type="password" id="password" name="password">
+
+                    </div>
+                    
+                </fieldset>
+                <button class="button" id="login-button">Login</button>
+            </form>
         </section>      
 
     </main>
