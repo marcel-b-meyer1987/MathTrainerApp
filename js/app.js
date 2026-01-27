@@ -132,7 +132,7 @@ loginButton.addEventListener("click", (e) => {
     // console.log("Username:", username);
     // console.log("Password:", password);
 
-    check if the user exists in localStorage
+    //check if the user exists in localStorage
     const userExists = localStorage.getItem(`MathTrainer_${username}_config`);
 
     if (userExists) {
