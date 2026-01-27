@@ -55,7 +55,9 @@ export class Config {
     }
 }
 
-export const defaultConfig = new Config(
+export const defaultConfig = new Config( //username, password, operators = ["+"], numberSpace = 10, exercisesPerSet = 20, allowNegativeNumbers = false, autoSave = true, showTimer = false
+    "Gast",
+    "",
     ["+"],
     10,
     20,
