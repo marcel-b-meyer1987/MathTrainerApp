@@ -24,7 +24,7 @@ export class Set {
 
     }
 
-    generateExercises(config || defaultConfig) {
+    generateExercises(config = defaultConfig) {
         // generate the exercises for the set, push them into an array and return the array
         let numberOfExercises = config.exercisesPerSet;
         let exercisesArray = [];
