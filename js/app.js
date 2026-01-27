@@ -148,7 +148,7 @@ loginButton.addEventListener("click", (e) => {
         console.log(`User ${username} not found. Please register first.`);
         // Optionally, show an error message to the user
     }
-}
+});
 //...
 
 
