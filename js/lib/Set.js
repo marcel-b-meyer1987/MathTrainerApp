@@ -1,4 +1,5 @@
-import { Exercise } from "./Exercise.js"
+import { Exercise } from "./Exercise.js";
+import { Config, defaultConfig } from "./Config.js";
 
 export class Set {
     // Set of exercises
@@ -23,7 +24,7 @@ export class Set {
 
     }
 
-    generateExercises(config) {
+    generateExercises(config || defaultConfig) {
         // generate the exercises for the set, push them into an array and return the array
         let numberOfExercises = config.exercisesPerSet;
         let exercisesArray = [];
