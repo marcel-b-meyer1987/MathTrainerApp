@@ -40,12 +40,12 @@ export class User {
 
 
         //check if the user exists in localStorage
-        const userExists = localStorage.getItem(`MathTrainer_${username}_config`);
+        const userExists = localStorage.getItem(`MathTrainer_${name}_config`);
 
         if(password === userExists.password) {  //temporary password check
-        console.log(`User ${username} found. Logging in...`);
+        console.log(`User ${name} found. Logging in...`);
         // generate new user object with loaded config  
-        user = new User(username, password, new Config().loadFromStorage(username));
+        let user = new User(name, password, new Config().loadFromStorage(name));
         console.log("User object:", user);
         console.log("Loaded user config:", user.config);
         // proceed to training section
@@ -57,6 +57,8 @@ export class User {
         console.log(`Incorrect password for user ${username}.`);
         // Optionally, show an error message to the user
         }
+
+        return user;
     }   
 }
 

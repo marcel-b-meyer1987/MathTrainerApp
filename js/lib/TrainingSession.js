@@ -37,7 +37,7 @@ export class TrainingSession {
         return JSON.parse(localStorage.getItem(`MathTrainer_${this.#user}_config`)) || dummyConfigObj;
     }
 
-    updateConfig() {
+    readConfigFromForm() {
         /* MUST BE FIXED LATER
         // load configuration from user input in the settings form
         let operators = [];
@@ -54,6 +54,19 @@ export class TrainingSession {
         return config;
         */
         // temporary fixed config for testing
+
+
+        /*
+        username, 
+        password, 
+        operators = ["+"], 
+        numberSpace = 10, 
+        exercisesPerSet = 20,
+        allowNegativeNumbers = false,
+        autoSave = true, 
+        showTimer = false
+        */
+
         const config = {
             operators: ["+","-"],
             numberSpace: 20,
@@ -62,6 +75,19 @@ export class TrainingSession {
             negativeNumbers: false
         };
         return config;
+
+
+
+    // const formData = new FormData(settingsForm);
+    // const username = formData.get("username");
+    // const age = parseInt(formData.get("age"));
+    // const darkMode = formData.get("dark-mode") === "on" ? true : false;
+    // const autoSave = formData.get("auto-save") === "on" ? true : false;
+    // const numberSpace = parseInt(formData.get("number-space"));
+    // const numberExercises = parseInt(formData.get("number-exercises"));
+    // const allowNegative = formData.get("allow-negative") === "on" ? true : false;
+    // const operations = formData.getAll("operations");
+    // const timerEnabled = formData.get("timer") === "on" ? true : false;
     }
 
     saveConfig(config) {

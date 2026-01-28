@@ -4,6 +4,7 @@ import { User } from "./lib/User.js";
 //ROBERT MEYER
 
 //main app logic comes here
+let user;
 let session = new TrainingSession();
 
 //hook up sections
@@ -65,18 +66,13 @@ const saveSettingsBtn = document.querySelector("#save-settings-button");
 
 saveSettingsBtn.addEventListener("click", (e) => {
     e.preventDefault();
-    const formData = new FormData(settingsForm);
-    const username = formData.get("username");
-    const age = parseInt(formData.get("age"));
-    const darkMode = formData.get("dark-mode") === "on" ? true : false;
-    const autoSave = formData.get("auto-save") === "on" ? true : false;
-    const numberSpace = parseInt(formData.get("number-space"));
-    const numberExercises = parseInt(formData.get("number-exercises"));
-    const allowNegative = formData.get("allow-negative") === "on" ? true : false;
-    const operations = formData.getAll("operations");
-    const timerEnabled = formData.get("timer") === "on" ? true : false;
+
+    const configObj = session.readConfigFromForm();
+    session.saveConfig(configObj);
 
     //... save settings logic here ...
+
+
     console.log("Username:", username);
     console.log("Age:", age);
     console.log("Dark Mode:", darkMode);
@@ -87,7 +83,11 @@ saveSettingsBtn.addEventListener("click", (e) => {
     console.log("Operations:", operations);
     console.log("Timer Enabled:", timerEnabled);
     console.log("Settings saved:");
+
+    
 });
+
+
 
 //============================== TRAINING SECTION ============================//
 
@@ -136,14 +136,7 @@ loginButton.addEventListener("click", (e) => {
     const userExists = localStorage.getItem(`MathTrainer_${username}_config`);
 
     if (userExists) {
-        console.log(`User ${username} found. Logging in...`);
-        // generate new user object with loaded config  
-        const user = new User(username, password, new Config().loadFromStorage(username));
-        console.log("User object:", user);
-        console.log("Loaded user config:", user.config);
-        // proceed to training section
-        trainingSection.classList.remove("hidden");
-        allSections.filter(sec => sec !== trainingSection).forEach(sec => sec.classList.add("hidden"));
+        user = User.Login(username, password);
     } else {
         console.log(`User ${username} not found. Please register first.`);
         // Optionally, show an error message to the user
