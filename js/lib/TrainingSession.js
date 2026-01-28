@@ -62,11 +62,13 @@ export class TrainingSession {
             allowNegativeNumbers: document.querySelector("#settings-form #negative-numbers").checked,
             showTimer: document.querySelector("#settings-form #timer").checked,
         };
-        return config;
 
+        return config;
     }   
 
     saveConfig(config) {
+        // update user property
+        this.#user = config.username || this.#user;
         // save configuration to local storage for future sessions
         localStorage.setItem(`MathTrainer_${this.#user}_config`, JSON.stringify(config));
     }
