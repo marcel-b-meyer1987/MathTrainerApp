@@ -44,29 +44,25 @@ export class User {
     }
 
     static login(name, password) {
-        // login logic here
-
+        
+     // MUST BE FIXED: currently password is not checked properly (ALWAYS FAILS!)
 
         //check if the user exists in localStorage
-        const userExists = localStorage.getItem(`MathTrainer_${name}_config`);
+        const userConfig = localStorage.getItem(`MathTrainer_${name}_config`);
 
-        if(password === userExists.password) {  //temporary password check
+        // login logic here
+        if(password === userConfig.password) {  //temporary password check
         console.log(`User ${name} found. Logging in...`);
         // generate new user object with loaded config  
-        let user = new User(name, password, new Config().loadFromStorage(name));
+        let user = new User(userConfig);
         console.log("User object:", user);
         console.log("Loaded user config:", user.config);
-        // proceed to training section
-        trainingSection.classList.remove("hidden");
-        allSections.filter(sec => sec !== trainingSection).forEach(sec => sec.classList.add("hidden"));
-        } 
-        
-        else {
-        console.log(`Incorrect password for user ${username}.`);
+        return user;
+        } else {
+        console.log(`Incorrect password for user ${name}.`);
+        return null;
         // Optionally, show an error message to the user
         }
-
-        return user;
     }   
 }
 

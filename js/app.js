@@ -82,7 +82,7 @@ saveSettingsBtn.addEventListener("click", (e) => {
     console.log("Allow Negative:", configObj.allowNegativeNumbers);
     console.log("Operations:", configObj.operators);
     console.log("Timer Enabled:", configObj.showTimer);
-    console.log("Settings saved:");
+    console.log("Settings saved.");
 
     
 });
@@ -136,7 +136,19 @@ loginButton.addEventListener("click", (e) => {
     const userExists = localStorage.getItem(`MathTrainer_${username}_config`);
 
     if (userExists) {
-        user = User.Login(username, password);
+        session.user = User.login(username, password);
+        if (!session.user) {
+            console.log("Login failed. Incorrect password.");
+            return;
+        } else {
+            // successful login => load user config + proceed to training section
+            session.loadConfig();
+            console.log(`User ${username} logged in successfully.`);
+            // proceed to training section
+            trainingSection.classList.remove("hidden");
+            allSections.filter(sec => sec !== trainingSection).forEach(sec => sec.classList.add("hidden"));
+        }
+
     } else {
         console.log(`User ${username} not found. Please register first.`);
         // Optionally, show an error message to the user

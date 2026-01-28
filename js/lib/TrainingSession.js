@@ -1,13 +1,15 @@
 import { Set } from "./Set.js";
 import { User } from "./User.js";
+import { Config, defaultConfig } from "./Config.js";
 
+/*
 const dummyConfigObj = {
     "operators": ["+","-"],
     "numberSpace": 20,
     "exercisesPerSet": 20,
     "negativeNumbers": false,
     "autoSave": true
-}
+} */
 
 export class TrainingSession {
     id;
@@ -21,7 +23,7 @@ export class TrainingSession {
     #endTime;
     duration;
 
-    constructor(configObj = dummyConfigObj, user = "Gast") {
+    constructor(configObj = defaultConfig, user = "Gast") {
         this.#isActive = false;
         this.id = crypto.randomUUID();
         this.#user = user;
@@ -53,7 +55,7 @@ export class TrainingSession {
         const config = {
             username: formData.get("username"),
             age: formData.get("age") === "" ? 0 : parseInt(formData.get("age")), //if empty, set to 0
-            password: formData.get("password"),
+            password: formData.get("password") || "", //if empty, set to empty string
             operators: operators,
             numberSpace: parseInt(formData.get("number-space")),
             exercisesPerSet: parseInt(formData.get("number-exercises")),
