@@ -57,7 +57,8 @@ export class TrainingSession {
 
 
         /*
-        username, 
+        username,
+        age,
         password, 
         operators = ["+"], 
         numberSpace = 10, 
@@ -67,28 +68,33 @@ export class TrainingSession {
         showTimer = false
         */
 
-        const config = {
-            operators: ["+","-"],
-            numberSpace: 20,
-            exercisesPerSet: 20,
-            autoSave: true,
-            negativeNumbers: false
-        };
-        return config;
 
+    const formData = new FormData(document.forms['settings-form']);
+    
+    // create operators array from checked checkboxes
+    let ops = Array.from(document.querySelectorAll("#operations input"));
+    let operators = [];
+    ops.forEach((op) => {
+        if(op.checked) {
+            operators.push(op.id);
+        }
+    });
 
+    const config = {
+        username: formData.get("username"),
+        age: formData.get("age") === "" ? 0 : parseInt(formData.get("age")), //if empty, set to 0
+        password: formData.get("password"),
+        operators: operators,
+        numberSpace: parseInt(formData.get("number-space")),
+        exercisesPerSet: parseInt(formData.get("number-exercises")),
+        darkMode: formData.get("dark-mode").checked === "true" ? true : false,
+        autoSave: formData.get("auto-save").checked === "true" ? true : false,
+        allowNegativeNumbers: formData.get("allow-negative").checked === "true" ? true : false,
+        showTimer: formData.get("timer").checked === "true" ? true : false,
+    };
+    return config;
 
-    // const formData = new FormData(settingsForm);
-    // const username = formData.get("username");
-    // const age = parseInt(formData.get("age"));
-    // const darkMode = formData.get("dark-mode") === "on" ? true : false;
-    // const autoSave = formData.get("auto-save") === "on" ? true : false;
-    // const numberSpace = parseInt(formData.get("number-space"));
-    // const numberExercises = parseInt(formData.get("number-exercises"));
-    // const allowNegative = formData.get("allow-negative") === "on" ? true : false;
-    // const operations = formData.getAll("operations");
-    // const timerEnabled = formData.get("timer") === "on" ? true : false;
-    }
+}
 
     saveConfig(config) {
         // save configuration to local storage for future sessions

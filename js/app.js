@@ -73,15 +73,15 @@ saveSettingsBtn.addEventListener("click", (e) => {
     //... save settings logic here ...
 
 
-    console.log("Username:", username);
-    console.log("Age:", age);
-    console.log("Dark Mode:", darkMode);
-    console.log("Auto Save:", autoSave);
-    console.log("Number Space:", numberSpace);
-    console.log("Number of Exercises:", numberExercises);
-    console.log("Allow Negative:", allowNegative);
-    console.log("Operations:", operations);
-    console.log("Timer Enabled:", timerEnabled);
+    console.log("Username:", configObj.username);
+    console.log("Age:", configObj.age);
+    console.log("Dark Mode:", configObj.darkMode);
+    console.log("Auto Save:", configObj.autoSave);
+    console.log("Number Space:", configObj.numberSpace);
+    console.log("Number of Exercises:", configObj.exercisesPerSet);
+    console.log("Allow Negative:", configObj.allowNegativeNumbers);
+    console.log("Operations:", configObj.operators);
+    console.log("Timer Enabled:", configObj.showTimer);
     console.log("Settings saved:");
 
     
