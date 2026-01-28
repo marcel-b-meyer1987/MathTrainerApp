@@ -38,63 +38,33 @@ export class TrainingSession {
     }
 
     readConfigFromForm() {
-        /* MUST BE FIXED LATER
-        // load configuration from user input in the settings form
+
+        const formData = new FormData(document.forms['settings-form']);
+        
+        // create operators array from checked checkboxes
+        let ops = Array.from(document.querySelectorAll("#operations input"));
         let operators = [];
-        document.querySelectorAll('input[name="operation"]:checked').forEach((checkbox) => {
-            operators.push(checkbox.id);
+        ops.forEach((op) => {
+            if(op.checked) {
+                operators.push(op.id);
+            }
         });
+
         const config = {
+            username: formData.get("username"),
+            age: formData.get("age") === "" ? 0 : parseInt(formData.get("age")), //if empty, set to 0
+            password: formData.get("password"),
             operators: operators,
-            numberSpace: document.getElementById("number-space").value,
-            numberExercises: document.getElementById("number-exercises").value,
-            autoSave: document.getElementById("autosave").checked,
-            negativeNumbers: document.getElementById("negative-numbers").checked
+            numberSpace: parseInt(formData.get("number-space")),
+            exercisesPerSet: parseInt(formData.get("number-exercises")),
+            darkMode: document.querySelector("#settings-form #dark-mode").checked,
+            autoSave: document.querySelector("#settings-form #autosave").checked,
+            allowNegativeNumbers: document.querySelector("#settings-form #negative-numbers").checked,
+            showTimer: document.querySelector("#settings-form #timer").checked,
         };
         return config;
-        */
-        // temporary fixed config for testing
 
-
-        /*
-        username,
-        age,
-        password, 
-        operators = ["+"], 
-        numberSpace = 10, 
-        exercisesPerSet = 20,
-        allowNegativeNumbers = false,
-        autoSave = true, 
-        showTimer = false
-        */
-
-
-    const formData = new FormData(document.forms['settings-form']);
-    
-    // create operators array from checked checkboxes
-    let ops = Array.from(document.querySelectorAll("#operations input"));
-    let operators = [];
-    ops.forEach((op) => {
-        if(op.checked) {
-            operators.push(op.id);
-        }
-    });
-
-    const config = {
-        username: formData.get("username"),
-        age: formData.get("age") === "" ? 0 : parseInt(formData.get("age")), //if empty, set to 0
-        password: formData.get("password"),
-        operators: operators,
-        numberSpace: parseInt(formData.get("number-space")),
-        exercisesPerSet: parseInt(formData.get("number-exercises")),
-        darkMode: formData.get("dark-mode").checked === "true" ? true : false,
-        autoSave: formData.get("auto-save").checked === "true" ? true : false,
-        allowNegativeNumbers: formData.get("allow-negative").checked === "true" ? true : false,
-        showTimer: formData.get("timer").checked === "true" ? true : false,
-    };
-    return config;
-
-}
+    }   
 
     saveConfig(config) {
         // save configuration to local storage for future sessions
