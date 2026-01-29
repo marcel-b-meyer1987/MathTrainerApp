@@ -48,7 +48,7 @@ export class User {
      // MUST BE FIXED: currently password is not checked properly (ALWAYS FAILS!)
 
         //check if the user exists in localStorage
-        const userConfig = localStorage.getItem(`MathTrainer_${name}_config`);
+        const userConfig = JSON.parse(localStorage.getItem(`MathTrainer_${name}_config`));
 
         // login logic here
         if(password === userConfig.password) {  //temporary password check
