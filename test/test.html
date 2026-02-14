@@ -1,59 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="../styles/style.css">
+  <meta charset="utf-8">
+  <title>Jasmine Spec Runner v6.0.1</title>
+
+  <link rel="shortcut icon" type="image/png" href="lib/jasmine-6.0.1/jasmine_favicon.png">
+  <link rel="stylesheet" href="lib/jasmine-6.0.1/jasmine.css">
+
+  <script src="lib/jasmine-6.0.1/jasmine.js"></script>
+  <script src="lib/jasmine-6.0.1/jasmine-html.js"></script>
+  <script src="lib/jasmine-6.0.1/boot0.js"></script>
+  <!-- optional: include a file here that configures the Jasmine env -->
+  <script src="lib/jasmine-6.0.1/boot1.js"></script>
+
+  <!-- include source files here... -->
+  <script type="module" src="../js/lib/User.js"></script>
+
+  <!-- include spec files here... -->
+  <script type="module" src="./js-test/UserTest.js"></script>
+  <script type="module" src="./js-test/ExerciseTest.js"></script>
+
 </head>
+
 <body>
-
-    <header>
-        <h1>Math Trainer - TEST SUITE</h1>
-        
-    </header>
-    <main>
-        <section id="start-dialog">
-
-            
-            <fieldset id="base">
-                <legend>Grundeinstellungen</legend>
-                <div>
-                    <label for="number-space">Zahlrenraum bis: </label>
-                    <input type="tel" name="number-space" id="number-space" value="20">
-                </div>  
-                <div>
-                    <label for="number-exercises">Übungen je Set: </label>
-                    <input type="tel" name="number-exercises" id="number-exercises" value="20">
-                </div>
-            </fieldset>
-            <fieldset id="operations">
-                <legend>Operationen</legend>
-                <div>
-                    <input type="checkbox" name="plus" id="plus">
-                    <label for="plus">Plus / +</label>
-                </div>
-                <div>
-                    <input type="checkbox" name="minus" id="minus">
-                    <label for="minus">Minus / -</label>
-                </div>
-                <div>
-                    <input type="checkbox" name="multiply" id="multiply">
-                    <label for="multiply">Mal / x</label>
-                </div>
-                <div>
-                    <input type="checkbox" name="divide" id="divide">
-                    <label for="divide">Geteilt durch / &#247;</label>
-                </div>
-            </fieldset>
-
-            <button class="button" id="start-button">Start</button>
-            <button class="button" id="stop-button">Stop</button>
-            <button class="button" id="save-settings-button">Einstellungen Speichern</button>
-        </section>
-    
-    <!-- <script type="module" src="./exercise_test.js"></script> -->
-    <!-- <script type="module" src="./Set_test.js"></script> -->
-    <script type="module" src="./TrainingSession_test.js"></script>
 </body>
 </html>

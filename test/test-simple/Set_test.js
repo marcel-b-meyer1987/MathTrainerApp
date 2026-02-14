@@ -1,4 +1,4 @@
-import { Set } from '../js/lib/Set.js';
+import { Set } from '../../../js/lib/Set.js';
 
 const testConfigObj = {
     "operators": ["+","-"],

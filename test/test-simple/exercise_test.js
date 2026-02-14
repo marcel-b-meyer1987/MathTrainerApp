@@ -1,4 +1,4 @@
-import { Exercise } from "../js/lib/Exercise.js";
+import { Exercise } from "../../../js/lib/Exercise.js";
 
 console.log("Testing exercise module");
 

@@ -1,4 +1,4 @@
-import { TrainingSession } from "../js/lib/TrainingSession.js";
+import { TrainingSession } from "../../../js/lib/TrainingSession.js";
 
 /*
 describe("TrainingSession", () => {
