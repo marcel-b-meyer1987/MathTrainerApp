@@ -24,26 +24,38 @@ export class Set {
     }
 
     generateExercises(config) {
-        // generate the exercises for the set, push them into an array and return the array
-        let numberOfExercises = config.exercisesPerSet;
-        let exercisesArray = [];
-        for (let i = 0; i < numberOfExercises; i++) {
-            let randomOperand1 = Math.floor(Math.random() * config.numberSpace) + 1;
-            let randomOperand2 = Math.floor(Math.random() * config.numberSpace) + 1;    
-            let radndomOperator = config.operators[Math.floor(Math.random() * config.operators.length)];
-            
-            //if no negative numbers allowed, ensure operand1 >= operand2 for subtraction
-            if (!config.negativeNumbers && radndomOperator === "-" && randomOperand1 < randomOperand2) {
-                [randomOperand1, randomOperand2] = [randomOperand2, randomOperand1];
-            }
+        
+        // in case no max. result is specified, assume the same limit as for operands
+        let maxResult = config.maxResult || config.numberSpace; 
 
-            //build local config object for Exercise
-            const localConfig = {
-                operand1: randomOperand1,
-                operand2: randomOperand2,
-                operator: radndomOperator
-            };
-            exercisesArray.push(new Exercise(localConfig));
+        // generate the exercises for the set, push them into an array and return the array
+        let exercisesArray = [];
+        for (let i = 0; i < config.exercisesPerSet; i++) {
+            let newExercise;
+
+            // re-generate new exercises until the exercise meets the wanted conditions according to the config
+            do {        
+                let randomOperand1 = Math.floor(Math.random() * config.numberSpace) + 1;
+                let randomOperand2 = Math.floor(Math.random() * config.numberSpace) + 1;    
+                let radndomOperator = config.operators[Math.floor(Math.random() * config.operators.length)];
+                
+                //if no negative numbers allowed, ensure operand1 >= operand2 for subtraction
+                if (!config.negativeNumbers && radndomOperator === "-" && randomOperand1 < randomOperand2) {
+                    [randomOperand1, randomOperand2] = [randomOperand2, randomOperand1];
+                }
+
+                //build local config object for Exercise
+                const localConfig = {
+                    operand1: randomOperand1,
+                    operand2: randomOperand2,
+                    operator: radndomOperator
+                };
+
+                newExercise = new Exercise(localConfig);
+
+            } while (!newExercise.suits(config));   // ensure the generated exercise suits the given config, otherwise re-generate 
+
+            exercisesArray.push(newExercise);
         }
         return exercisesArray;
     }

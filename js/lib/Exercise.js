@@ -56,4 +56,27 @@ export class Exercise {
         this.solutionCorrect = (userSolution === this.solution);
         return this.solutionCorrect;
     }
+
+    suits(config) {
+        //check if the exercise meets the expectations of the config
+        //if at any point it doesn't, return false, otherwise eventually return true
+
+        if (this.operand1 > config.numberSpace || this.operand2 > config.numberSpace) {    //check if operands do not exceed maximum
+            return false;
+        }   
+
+        if (this.getSolution() > config.maxResult) {       //check if result doesn't exceed maximum
+            return false;
+        }
+
+        if ((!config.decimalResultsAllowed) && (!Number.isInteger(this.getSolution()))) {     //check if result is an integer (if decimals are not explicitly allowed)
+            return false;
+        }   
+        
+        if (this.getSolution < 0) {        //check if result is positive (if negatives are not explicitly allowed)
+            return false;
+        }
+        
+        return true;
+    }
 }

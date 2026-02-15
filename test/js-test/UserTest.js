@@ -23,4 +23,6 @@ describe("Test Suite: User.js", () => {
         expect(namedUser.password).toBe("test-passwort");
     });
 
+    
+
 });
