@@ -1,4 +1,5 @@
 import { Exercise } from "../../js/lib/Exercise.js";
+import { User } from "../../js/lib/User.js";
 
 describe("Test Suite: Exercise.js", () => {
 
@@ -63,6 +64,24 @@ describe("Test Suite: Exercise.js", () => {
         exercise = new Exercise(configObj);
 
         expect(exercise.toString()).toBe("15 + 5 = ");
+    });
+
+    it("can be marked as difficult by user", () => {
+        // Arrange: user + exercise
+        let testUser = new User("Max", "test");
+        configObj = {
+            operand1: 15,
+            operand2: 5,
+            operator: "+"
+        };
+        exercise = new Exercise(configObj);
+
+        // Act: mark the exercise as difficult for the testUser
+        exercise.markAsDifficult(testUser);
+
+        // Assert: the testUser should have 1 item in his difficultExercises array and it should be exactly this one
+        expect(testUser.difficultExercises.length).toBe(1);
+        expect(testUser.difficultExercises[0]).toBe(exercise);
     });
 
 });
