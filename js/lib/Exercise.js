@@ -79,4 +79,23 @@ export class Exercise {
         
         return true;
     }
+
+    static recreateFromStorage(objFromStorage) {
+        let dummyConfig = {
+            operand1: 0,
+            operand2: 0,
+            operator: "+"
+        };
+        let exercise = new Exercise(dummyConfig);
+
+        exercise.id = objFromStorage.id;
+        exercise.operand1 = objFromStorage.operand1;
+        exercise.operand2 = objFromStorage.operand2;
+        exercise.operator = objFromStorage.operator;
+        exercise.solution = objFromStorage.solution;
+        exercise.solved = objFromStorage.solved;
+        exercise.solutionCorrect = objFromStorage.solutionCorrect;
+
+        return exercise;
+    }
 }
