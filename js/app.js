@@ -3,8 +3,15 @@ import { User } from "./lib/User.js";
 
 //ROBERT MEYER
 
+const redirectToLogin = (settingsObj) => {
+    alert("Bitte logge dich zuerst ein, um Übungsparameter speichern zu können");
+    loginSection.classList.remove("hidden");
+    allSections.filter(sec => sec !== loginSection).forEach(sec => sec.classList.add("hidden"));
+};
+
 //main app logic comes here
 const session = new TrainingSession();
+let user = null;
 
 //hook up sections
 const splashScreenSection = document.querySelector("#splash-screen-section");
@@ -58,12 +65,35 @@ loginLink.addEventListener("click", (e) => {
 
 //============================== SETTINGS SECTION ============================//
 
+const readSettingsFromUI = (UI) => {
+    let settingsArr = Array.from(UI.querySelectorAll("input"));
+    console.log(settingsArr);
+    let settingsObj = {};
+    
+    // LOGIC TO PARSE SETTINGS INTO VIABLE SETTINGS OBJECT FOR FURTHER USAGE
+    // MUST BE ADDED HERE
+
+    console.dir(settingsObj);
+
+    if(!user) {
+      redirectToLogin(settingsObj);  
+    } else {
+        user.updateSettings(settingsObj);
+        if(user.name != "Gast" && user.settings.autosave === true) {
+            user.saveProfile();
+        }
+    }
+
+}
+
 //hook up settings form + add event listener to save button
 const settingsForm = document.querySelector("#settings-form");
 const saveSettingsBtn = document.querySelector("#save-settings-button");
 
 saveSettingsBtn.addEventListener("click", (e) => {
     e.preventDefault();
+    readSettingsFromUI(settingsForm);
+    /*
     const formData = new FormData(settingsForm);
     const username = formData.get("username");
     const age = parseInt(formData.get("age"));
@@ -86,6 +116,7 @@ saveSettingsBtn.addEventListener("click", (e) => {
     console.log("Operations:", operations);
     console.log("Timer Enabled:", timerEnabled);
     console.log("Settings saved:");
+    */
 });
 
 //============================== TRAINING SECTION ============================//

@@ -1,3 +1,4 @@
+import { Exercise } from "../../js/lib/Exercise.js";
 import { User } from "../../js/lib/User.js";
 
 // ROBERT MEYER 
@@ -53,6 +54,31 @@ describe("Test Suite: User.js", () => {
 
         // Clean up - remove the test profile from storage
         if(localStorage.getItem(`MathTrainer_${namedUser.name}_Profile`)) localStorage.removeItem(`MathTrainer_${namedUser.name}_Profile`);
+    });
+
+    it("re-hydrdates all exercises marked as difficult in the user's profile once loaded from storage", () => {
+        // Arrange - save profile of test user object + 2 difficult exercises to storage
+        let exercise1 = new Exercise({operand1: 15, operand2: 5, operator: "+"});
+        let exercise2 = new Exercise({operand1: 20, operand2: 5, operator: "-"});
+        exercise1.markAsDifficult(namedUser);
+        exercise2.markAsDifficult(namedUser);
+        namedUser.saveProfile();
+
+        // Act - try to load the profile data of the test user from storage + instantiate a User object based on the profile data
+        let loadedUser = User.loadProfileFromStorage(namedUser.name);
+        console.dir(loadedUser);
+
+        // Assert - every object in the difficultExercises array of the user profile loaded from storage should be 
+        // re-hydrated, i. e. not just an object parsed from a JSON string, but an instance of the Exercise class
+        expect(loadedUser.difficultExercises.filter((item) => item instanceof Exercise).length).toEqual(loadedUser.difficultExercises.length);
+        
+
+        // Clean up - remove the test profile from storage
+        if(localStorage.getItem(`MathTrainer_${namedUser.name}_Profile`)) localStorage.removeItem(`MathTrainer_${namedUser.name}_Profile`);
+    });
+
+    afterAll(() => {
+        namedUser = null;
     });
 
 });

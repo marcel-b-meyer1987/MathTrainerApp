@@ -1,9 +1,12 @@
+import { Exercise } from "./Exercise.js";
+
 export class User {
     id;
     name;
     password;
     regDate;
     difficultExercises;
+    settings;
 
     constructor(name, password) {
         this.id = crypto.randomUUID();
@@ -11,10 +14,15 @@ export class User {
         this.password = password;
         this.regDate = Date.now();
         this.difficultExercises = [];
+        this.settings = {};
     }
 
     markExerciseAsDifficult(exercise) {
         this.difficultExercises.push(exercise);
+    }
+
+    updateSettings(settingsObj) {
+        this.settings = settingsObj;
     }
 
     saveProfile() {
@@ -30,7 +38,7 @@ export class User {
         let user = new User(profileObj.name, profileObj.password);
         user.id = profileObj.id;
         user.regDate = profileObj.regDate;
-        user.difficultExercises = profileObj.difficultExercises;
+        profileObj.difficultExercises.forEach((objString) => user.difficultExercises.push(Exercise.recreateFromStorage(objString)));
 
         return user;
     }
