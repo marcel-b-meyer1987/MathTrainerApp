@@ -70,7 +70,7 @@ const readSettingsFromUI = (UI) => {
     console.log(settingsArr);
     let settingsObj = {};
     
-    // LOGIC TO PARSE SETTINGS INTO VIABLE SETTINGS OBJECT FOR FURTHER USAGE
+    // LOGIC TO PARSE SETTINGS FROM UI INTO VIABLE SETTINGS OBJECT FOR FURTHER USAGE
     // MUST BE ADDED HERE
 
     console.dir(settingsObj);
