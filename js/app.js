@@ -11,8 +11,8 @@ const redirectToLogin = (settingsObj) => {
 };
 
 //main app logic comes here
-const session = new TrainingSession();
 let user = new User("Gast", "");
+const session = new TrainingSession(user.settings, user);
 
 //hook up sections
 const splashScreenSection = document.querySelector("#splash-screen-section");
@@ -107,8 +107,8 @@ const startStopBtn = document.querySelector("#start-stop-button");
 startStopBtn.addEventListener("click", (e) => {
     e.preventDefault();
     if (!session.isActive) {
-        let config = session.loadConfig();
-        session.start(config);
+        //let config = session.loadConfig();
+        session.start(user.settings);
         startStopBtn.innerText = "Abbrechen";
     } else {
         session.stop();
