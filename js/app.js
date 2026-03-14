@@ -1,5 +1,6 @@
 import { TrainingSession } from "./lib/TrainingSession.js";
 import { User } from "./lib/User.js";
+import { readSettingsFromUI } from "./lib/Settings.js";
 
 //ROBERT MEYER
 
@@ -11,7 +12,7 @@ const redirectToLogin = (settingsObj) => {
 
 //main app logic comes here
 const session = new TrainingSession();
-let user = null;
+let user = new User("Gast", "");
 
 //hook up sections
 const splashScreenSection = document.querySelector("#splash-screen-section");
@@ -65,34 +66,13 @@ loginLink.addEventListener("click", (e) => {
 
 //============================== SETTINGS SECTION ============================//
 
-const readSettingsFromUI = (UI) => {
-    let settingsArr = Array.from(UI.querySelectorAll("input"));
-    console.log(settingsArr);
-    let settingsObj = {};
-    
-    // LOGIC TO PARSE SETTINGS FROM UI INTO VIABLE SETTINGS OBJECT FOR FURTHER USAGE
-    // MUST BE ADDED HERE
-
-    console.dir(settingsObj);
-
-    if(!user) {
-      redirectToLogin(settingsObj);  
-    } else {
-        user.updateSettings(settingsObj);
-        if(user.name != "Gast" && user.settings.autosave === true) {
-            user.saveProfile();
-        }
-    }
-
-}
-
 //hook up settings form + add event listener to save button
 const settingsForm = document.querySelector("#settings-form");
 const saveSettingsBtn = document.querySelector("#save-settings-button");
 
 saveSettingsBtn.addEventListener("click", (e) => {
     e.preventDefault();
-    readSettingsFromUI(settingsForm);
+    readSettingsFromUI(settingsForm, user);
     /*
     const formData = new FormData(settingsForm);
     const username = formData.get("username");

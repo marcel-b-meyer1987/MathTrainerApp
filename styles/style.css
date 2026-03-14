@@ -220,6 +220,16 @@ fieldset > legend {
     margin-right: 0.5rem;
 }
 
+.checkbox-settings {
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+    align-items: center;
+    gap: 1rem;
+    margin-right: 0.5rem;
+}
+
 #exercise-settings > label {
     grid-column: 1/2;
 }
