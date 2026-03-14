@@ -9,9 +9,8 @@ export const readSettingsFromUI = (UI, user) => {
     let settingsObj = {
         operators: [],
         numberSpace: 10,
-        //maxResult: 10,
         exercisesPerSet: 20,
-        autoSave: true,
+        autosave: true,
         negativeNumbers: false,
         decimalResultsAllowed: false
     };
@@ -33,6 +32,12 @@ export const readSettingsFromUI = (UI, user) => {
                                 break;
                             case "decimal-numbers":
                                 settingsObj.decimalResultsAllowed = true;
+                                break;
+                            case "timer":
+                                settingsObj.timer = true;
+                                break;
+                            case "autosave":
+                                settingsObj.autosave = true;
                                 break;
                         }
                     }
@@ -58,23 +63,11 @@ export const readSettingsFromUI = (UI, user) => {
     if (!settingsObj.maxResult) 
         settingsObj.maxResult = settingsObj.numberSpace;
 
-    // console.log("AFTER:");
-    // console.dir(settingsArr);
-    // console.dir(settingsObj);
-
-
     console.log(`Settings for user ${user}:`);
     console.dir(settingsObj);
 
     user.settings = settingsObj;
-
-    // if(!user) {
-    //   redirectToLogin(settingsObj);  
-    // } else {
-    //     user.updateSettings(settingsObj);
-    //     if(user.name != "Gast" && user.settings.autosave === true) {
-    //         user.saveProfile();
-    //     }
-    // }
-
+    if (user.settings.autosave) {
+        user.saveProfile();
+    }
 }

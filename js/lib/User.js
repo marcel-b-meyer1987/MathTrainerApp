@@ -38,6 +38,7 @@ export class User {
         let user = new User(profileObj.name, profileObj.password);
         user.id = profileObj.id;
         user.regDate = profileObj.regDate;
+        user.settings = profileObj.settings;
         profileObj.difficultExercises.forEach((objString) => user.difficultExercises.push(Exercise.recreateFromStorage(objString)));
 
         return user;

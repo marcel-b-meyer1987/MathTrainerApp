@@ -12,6 +12,9 @@ const redirectToLogin = (settingsObj) => {
 
 //main app logic comes here
 let user = new User("Gast", "");
+if(localStorage.getItem("MathTrainer_Gast_Profile")) {
+    user = User.loadProfileFromStorage("Gast");
+}
 const session = new TrainingSession(user.settings, user);
 
 //hook up sections
