@@ -149,6 +149,8 @@ export class Set {
                 <p>Benötigte Zeit: ${totalTime} Sekunden</p>
             </div>
         `;
+
+        this.abortBtn.innerText = "Nochmal";
     }
 
 
