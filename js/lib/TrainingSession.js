@@ -102,6 +102,7 @@ export class TrainingSession {
                             <input type="tel" id="solution-input" autocomplete="off">
                         </div>
                         <div class="inner-container">
+                            <button id="previous-exercise-button" class="previous-button">Zurück</button>
                             <button id="submit-solution-button" class="submit-button">Weiter</button>
                         </div>
                     </div>

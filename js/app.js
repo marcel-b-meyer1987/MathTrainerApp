@@ -1,6 +1,6 @@
 import { TrainingSession } from "./lib/TrainingSession.js";
 import { User } from "./lib/User.js";
-import { readSettingsFromUI } from "./lib/Settings.js";
+import { readSettingsFromUI, populateUIWithSettingsFromProfile } from "./lib/Settings.js";
 
 //ROBERT MEYER
 
@@ -43,6 +43,7 @@ const loginLink = document.querySelector("#login-link");
 
 
 settingsLink.addEventListener("click", (e) => {
+    refreshSettings(settingsForm, user);
     settingsSection.classList.remove("hidden");
     allSections.filter(sec => sec !== settingsSection).forEach(sec => sec.classList.add("hidden"));
 });
@@ -73,33 +74,13 @@ loginLink.addEventListener("click", (e) => {
 const settingsForm = document.querySelector("#settings-form");
 const saveSettingsBtn = document.querySelector("#save-settings-button");
 
+function refreshSettings(settingsForm, user) {
+    populateUIWithSettingsFromProfile(settingsForm, user);
+}
+
 saveSettingsBtn.addEventListener("click", (e) => {
     e.preventDefault();
     readSettingsFromUI(settingsForm, user);
-    /*
-    const formData = new FormData(settingsForm);
-    const username = formData.get("username");
-    const age = parseInt(formData.get("age"));
-    const darkMode = formData.get("dark-mode") === "on" ? true : false;
-    const autoSave = formData.get("auto-save") === "on" ? true : false;
-    const numberSpace = parseInt(formData.get("number-space"));
-    const numberExercises = parseInt(formData.get("number-exercises"));
-    const allowNegative = formData.get("allow-negative") === "on" ? true : false;
-    const operations = formData.getAll("operations");
-    const timerEnabled = formData.get("timer") === "on" ? true : false;
-
-    //... save settings logic here ...
-    console.log("Username:", username);
-    console.log("Age:", age);
-    console.log("Dark Mode:", darkMode);
-    console.log("Auto Save:", autoSave);
-    console.log("Number Space:", numberSpace);
-    console.log("Number of Exercises:", numberExercises);
-    console.log("Allow Negative:", allowNegative);
-    console.log("Operations:", operations);
-    console.log("Timer Enabled:", timerEnabled);
-    console.log("Settings saved:");
-    */
 });
 
 //============================== TRAINING SECTION ============================//

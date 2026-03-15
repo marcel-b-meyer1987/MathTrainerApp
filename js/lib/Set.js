@@ -10,6 +10,7 @@ export class Set {
     timerEnd; // to measure the time needed for the set
 
     solutionInput;
+    previousBtn;
     submitSolutionBtn;
     abortBtn;
 
@@ -63,8 +64,15 @@ export class Set {
     do() {
         //hook up DOM elements
         this.solutionInput = document.getElementById("solution-input");
+        this.previousBtn = document.getElementById("previous-exercise-button");
         this.submitSolutionBtn = document.getElementById("submit-solution-button");
         this.abortBtn = document.getElementById("start-stop-button");
+
+        // set up event listener for going back to the previous exercise
+        this.previousBtn.addEventListener("click", (e) => {
+            e.preventDefault();
+            this.showPreviousExercise(this.exerciseIndex);
+        });
 
         // set up event listener for solution submission
         this.submitSolutionBtn.addEventListener("click", (e) => {
@@ -110,6 +118,15 @@ export class Set {
         this.solutionInput.focus();
     }
 
+    showPreviousExercise(exerciseIndex) {
+        // display the previous exercise in the set
+        // only go back in case the user has not already arrived at the first exercise
+            if (exerciseIndex > 0) {
+                this.exerciseIndex -= 2;
+                this.showNextExercise(this.exerciseIndex);
+            }
+    }
+
     abort() {
         //abort the set + log time spent + exercises done
         this.status = "aborted";
@@ -132,7 +149,6 @@ export class Set {
                 <p>Benötigte Zeit: ${totalTime} Sekunden</p>
             </div>
         `;
-        // alert(`Set abgeschlossen!\nRichtige Lösungen: ${correctSolutions} von ${this.exercises.length}\nBenötigte Zeit: ${totalTime} Sekunden`);
     }
 
 

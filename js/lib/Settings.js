@@ -71,3 +71,7 @@ export const readSettingsFromUI = (UI, user) => {
         user.saveProfile();
     }
 }
+
+export const populateUIWithSettingsFromProfile = (UI, user) => {
+    return;
+}
