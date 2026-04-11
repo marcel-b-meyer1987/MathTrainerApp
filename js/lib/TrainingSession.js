@@ -51,6 +51,7 @@ export class TrainingSession {
         };
         return config;
         */
+
         // temporary fixed config for testing
         const config = {
             operators: ["+","-"],
@@ -105,6 +106,7 @@ export class TrainingSession {
                             <button id="previous-exercise-button" class="previous-button">Zurück</button>
                             <button id="submit-solution-button" class="submit-button">Weiter</button>
                         </div>
+                        ${this.sets[this.#setIndex].progDisp.renderHTML().outerHTML}
                     </div>
                 </fieldset>`;
     }

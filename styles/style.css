@@ -7,6 +7,8 @@
     --primary-color: rgb(226, 250, 222);
     --secondary-color: rgb(172, 196, 243);
     --accent-color: rgb(40, 200, 200);
+    --correct-color: var(--accent-color);
+    --incorrect-color: hsl(340, 89%, 60%);
 }
 
 body {
@@ -237,6 +239,45 @@ fieldset > legend {
 #base input {
     grid-column: 2/3;
     padding: 4px;
+}
+
+.progress-display {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+
+}
+
+.progress-display-element {
+    border-radius: 50%;
+    width: 0.8rem;
+    height: 0.8rem;
+}
+
+.progress-display-element:hover {
+    scale: 1.45;
+    cursor: pointer;
+}
+
+.progress-display-element.active {
+    scale: 1.5;
+}
+
+.pending {
+    border: 0.15rem solid var(--primary-color);
+    background-color: none;
+}
+
+.correct {
+    border: 0.15rem solid var(--correct-color);
+    background-color: var(--correct-color);
+}
+
+.incorrect {
+    border: none;
+    background-color: var(--incorrect-color);
 }
 
 footer {

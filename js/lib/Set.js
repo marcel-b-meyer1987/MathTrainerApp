@@ -1,11 +1,13 @@
 import { Exercise } from "./Exercise.js"
+import { ProgressDisplay } from "./ProgressDisplay.js";
 
 export class Set {
     // Set of exercises
     id;
     status; // pending, active, completed, aborted
     exercises; // array containing Exercise objects
-    exerciseIndex // to track the current exercise in the set
+    exerciseIndex; // to track the current exercise in the set
+    progDisp; // progress display
     timerStart; // to measure the time needed for the set
     timerEnd; // to measure the time needed for the set
 
@@ -20,6 +22,7 @@ export class Set {
         this.exercises = this.generateExercises(configObj);
         this.timerStart = Date.now();
         this.exerciseIndex = 0;
+        this.progDisp = new ProgressDisplay(this);
 
 
     }
@@ -114,6 +117,7 @@ export class Set {
         let exercise = this.exercises[exerciseIndex];
         document.querySelector("#exercise-details > legend").innerText = `Aufgabe ${exerciseIndex + 1} von ${this.exercises.length}`;
         document.getElementById("exercise").innerText = exercise.toString();
+        document.querySelector(".progress-display").replaceWith(this.progDisp.renderHTML());
         this.exerciseIndex++;
         this.solutionInput.focus();
     }
