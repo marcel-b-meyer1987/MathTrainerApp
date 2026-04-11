@@ -74,8 +74,18 @@ header li:hover {
 
 .logo {
     height: 72px;
-    margin-left: 0.1rem;
+    margin: 0.1rem;
 }
+
+.hamburger-icon {
+    display: block;
+}
+
+.hamburger-menu {
+    display: none;        
+}
+
+/* ============================== MAIN SECTION ============================== */
 
 main {
     padding: 1rem;
@@ -84,6 +94,21 @@ main {
     justify-content: flex-start;
     align-items: center;
     height: 100%;
+}
+
+main p {
+    text-align: center;
+}
+
+#splash-screen-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.splash-logo {
+    width: clamp(256px, 33vw, 90%);
 }
 
 h1 {
@@ -281,13 +306,60 @@ fieldset > legend {
 }
 
 footer {
-    position: fixed;
+    /* position: fixed;
     bottom: 0;
     left: 0;
-    right: 0;
+    right: 0; */
 
     padding: 1rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+/* ============================ FOR MEDIUM SCREENS (TABLET SIZE) ============================ */
+
+@media (max-width: 900px) {
+    
+    .logo-section h1 {
+        display: none;
+    }
+
+}
+
+
+/* ============================ FOR SMALL SCREENS (CELLPHONE SIZE) ============================ */
+
+@media (max-width: 750px) {
+
+    
+
+    header > nav > ul{
+        display: none;
+    }
+
+    .hamburger-icon {
+        background-color: var(--background-color) /* for dev only*/
+        display: block;
+        height: 72px;
+        width: 72px;
+        margin: 0.1rem;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        row-gap: 9px;
+    }
+
+    .hamburger-icon span {
+        background-color: var(--primary-color);
+        width: 48px;
+        height: 6px;
+        border-radius: 4px;
+    }
+
+    .hamburger-menu {
+
+    }
 }
