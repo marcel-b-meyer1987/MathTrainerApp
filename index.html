@@ -19,19 +19,21 @@
             <img src="./img/logo_dark_192x192.png" alt="Mathe-Trainer" class="logo">
         </div>
         <nav>
-            <ul>
-                <li id="settings-link">Einstellungen</li>
-                <li id="training-link">Training</li>
-                <li id="stats-link">Statistiken</li>
-                <li id="help-link">Hilfe</li>
-                <li id="login-link">Login</li>
-            </ul>
-
-            <div class="hamburger-icon">
-                <span></span>
-                <span></span>
-                <span></span>
+            <div popover id="menu" class="menu">
+                <ul>
+                    <li id="settings-link">Einstellungen</li>
+                    <li id="training-link">Training</li>
+                    <li id="stats-link">Statistiken</li>
+                    <li id="help-link">Hilfe</li>
+                    <li id="login-link">Login</li>
+                </ul>
             </div>
+
+            <button class="hamburger-icon" popovertarget="menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </nav>
     </header>
 
