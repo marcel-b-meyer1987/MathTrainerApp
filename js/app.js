@@ -2,7 +2,8 @@ import { TrainingSession } from "./lib/TrainingSession.js";
 import { User } from "./lib/User.js";
 import { readSettingsFromUI, populateUIWithSettingsFromProfile } from "./lib/Settings.js";
 
-//ROBERT MEYER
+// ROBERT MEYER
+// DIETER
 
 const redirectToLogin = (settingsObj) => {
     alert("Bitte logge dich zuerst ein, um Übungsparameter speichern zu können");
@@ -50,32 +51,32 @@ hamburgerBtn.addEventListener("click", e => {
 });
 
 settingsLink.addEventListener("click", (e) => {
-    
+    splashScreenSection.style.display = "none";
     refreshSettings(settingsForm, user);
     settingsSection.classList.remove("hidden");
     allSections.filter(sec => sec !== settingsSection).forEach(sec => sec.classList.add("hidden"));
 });
 
 trainingLink.addEventListener("click", (e) => {
-    
+    splashScreenSection.style.display = "none";
     trainingSection.classList.remove("hidden");
     allSections.filter(sec => sec !== trainingSection).forEach(sec => sec.classList.add("hidden"));
 });
 
 statsLink.addEventListener("click", (e) => {
-    
+    splashScreenSection.style.display = "none";
     statsSection.classList.remove("hidden");
     allSections.filter(sec => sec !== statsSection).forEach(sec => sec.classList.add("hidden"));
 });
 
 helpLink.addEventListener("click", (e) => {
-    
+    splashScreenSection.style.display = "none";
     helpSection.classList.remove("hidden");
     allSections.filter(sec => sec !== helpSection).forEach(sec => sec.classList.add("hidden"));
 });
 
 loginLink.addEventListener("click", (e) => {
-    
+    splashScreenSection.style.display = "none";
     loginSection.classList.remove("hidden");
     allSections.filter(sec => sec !== loginSection).forEach(sec => sec.classList.add("hidden"));
 });

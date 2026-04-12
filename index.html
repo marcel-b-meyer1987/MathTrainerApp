@@ -79,25 +79,27 @@
                 -->
 
                 <fieldset id="exercise-settings">
-                    <legend>Übungsparameter</legend>
+                    <legend>Zahlrenraum</legend>
                     <div class="text-settings">
-                        <label for="number-space">Zahlrenraum Operanden bis: </label>
+                        <label for="number-space">Operanden bis: </label>
                         <input type="tel" name="number-space" id="number-space" value="20">
 
                         
-                        <label for="number-space">Zahlrenraum Ergebnis bis: </label>
+                        <label for="number-space">Ergebnis bis: </label>
                         <input type="tel" name="max-result" id="max-result" value="20">
 
-                        <label for="number-exercises">Übungen je Reihe: </label>
-                        <input type="tel" name="number-exercises" id="number-exercises" value="20">
                     </div>
                     
                     <div class="checkbox-settings">
-                        <input type="checkbox" id="negative-numbers" name="negative-numbers">
-                        <label for="negative-numbers">Negative Ergebnisse</label>
+                        <div>
+                            <input type="checkbox" id="negative-numbers" name="negative-numbers">
+                            <label for="negative-numbers">Negative Ergebnisse</label>
+                        </div>
 
-                        <input type="checkbox" id="decimal-numbers" name="decimal-numbers">
-                        <label for="decimal-numbers">Dezimalzahlen als Ergebnisse</label>
+                        <div>
+                            <input type="checkbox" id="decimal-numbers" name="decimal-numbers">
+                            <label for="decimal-numbers">Dezimalzahlen als Ergebnisse</label>
+                        </div>
                     </div>
                     
                 </fieldset>
@@ -123,6 +125,11 @@
 
                 <fieldset id="other">
                     <legend>Sonstiges</legend>
+
+                        <div>
+                            <label for="number-exercises">Übungen je Reihe: </label>
+                            <input type="tel" name="number-exercises" id="number-exercises" value="20">
+                        </div>
                         <div>
                             <input type="checkbox" name="timer" id="timer">
                             <label for="timer">Timer anzeigen</label>

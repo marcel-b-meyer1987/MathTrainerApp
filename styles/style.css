@@ -31,6 +31,7 @@ body {
 }
 
 header {
+    height: var(--header-height);
     padding: 0.5vw 0.25vw;
     text-align: center;
     border-bottom: 2px solid rgba(172, 196, 243, 0.025);
@@ -52,7 +53,7 @@ nav {
     top: var(--header-height);
     right: 0;
     background-color: var(--background-color);
-    border: 1px solid var(--lighter-background-color);
+    border: 2px solid var(--lighter-background-color);
 
 }
 
@@ -137,7 +138,7 @@ main {
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    height: calc(100vh - var(--header-height) - var(--footer-height));
+    height: max(calc(100vh - var(--header-height) - var(--footer-height)), auto);
 }
 
 main p {
@@ -145,14 +146,14 @@ main p {
 }
 
 #splash-screen-section {
-    /* display: flex;
+    display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center; */
+    align-items: center;
 }
 
 .splash-logo {
-    width: clamp(128px, 33vw, 90%);
+    width: min(clamp(128px, 33vw, 90%), clamp(128px, 33vh, 90%));
 }
 
 h1 {
@@ -164,6 +165,13 @@ h2 {
     font-size: clamp(1rem, 1,5rem, 2rem);
     margin-bottom: 1rem;
     text-align: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: normal;
 }
 
 #session-control {
@@ -257,6 +265,7 @@ input {
 }
 
 fieldset {
+    flex-grow: 0;
     margin-bottom: 1rem;
     padding: 0.75rem 1rem 1.25rem 1rem;
     column-gap: 1rem;
@@ -280,6 +289,10 @@ fieldset > legend {
     font-weight: 600;
     border-radius: 4px;
     
+}
+
+fieldset input[type="tel"] {
+    width: 10ch;
 }
 
 .text-settings {
@@ -309,6 +322,10 @@ fieldset > legend {
 #base input {
     grid-column: 2/3;
     padding: 4px;
+}
+
+#save-settings-button {
+    align-self: center;
 }
 
 .progress-display {
@@ -363,6 +380,22 @@ footer {
     
     .logo-section h1 {
         display: none;
+    }
+
+    #settings-section fieldset {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        row-gap: 1.5rem;
+    }
+
+    .checkbox-settings {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        align-items: center;
+        gap: 1rem;
+        margin-right: 0.5rem;
     }
 
 }
