@@ -118,6 +118,14 @@ export class Set {
         document.querySelector("#exercise-details > legend").innerText = `Aufgabe ${exerciseIndex + 1} von ${this.exercises.length}`;
         document.getElementById("exercise").innerText = exercise.toString();
         document.querySelector(".progress-display").replaceWith(this.progDisp.renderHTML());
+        if (exercise.solved) {
+            this.solutionInput.value = exercise.userSolution.toString() || "";
+            if (exercise.solutionCorrect) {
+                this.solutionInput.style.border="3px solid var(--correct-color)";
+            } else {
+                this.solutionInput.style.border="3px solid var(--incorrect-color)";
+            }
+        }
         this.exerciseIndex++;
         this.solutionInput.focus();
     }

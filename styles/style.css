@@ -295,6 +295,10 @@ fieldset input[type="tel"] {
     width: 10ch;
 }
 
+#solution-input:focus {
+    outline: none;
+}
+
 .text-settings {
 
     display: grid;
