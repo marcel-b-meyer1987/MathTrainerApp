@@ -27,6 +27,7 @@ const helpSection = document.querySelector("#help-section");
 const loginSection = document.querySelector("#login-section");
 
 const allSections = Array.from([
+    menu,
     splashScreenSection,
     settingsSection,
     trainingSection,
@@ -44,37 +45,37 @@ const helpLink = document.querySelector("#help-link");
 const loginLink = document.querySelector("#login-link");
 
 hamburgerBtn.addEventListener("click", e => {
-    // menu.classList.toggle("hidden");
+    menu.classList.toggle("hidden");
     // menu.classList.toggle("menu");
 });
 
 settingsLink.addEventListener("click", (e) => {
-    menu.hidePopover();
+    
     refreshSettings(settingsForm, user);
     settingsSection.classList.remove("hidden");
     allSections.filter(sec => sec !== settingsSection).forEach(sec => sec.classList.add("hidden"));
 });
 
 trainingLink.addEventListener("click", (e) => {
-    menu.hidePopover();
+    
     trainingSection.classList.remove("hidden");
     allSections.filter(sec => sec !== trainingSection).forEach(sec => sec.classList.add("hidden"));
 });
 
 statsLink.addEventListener("click", (e) => {
-    menu.hidePopover();
+    
     statsSection.classList.remove("hidden");
     allSections.filter(sec => sec !== statsSection).forEach(sec => sec.classList.add("hidden"));
 });
 
 helpLink.addEventListener("click", (e) => {
-    menu.hidePopover();
+    
     helpSection.classList.remove("hidden");
     allSections.filter(sec => sec !== helpSection).forEach(sec => sec.classList.add("hidden"));
 });
 
 loginLink.addEventListener("click", (e) => {
-    menu.hidePopover();
+    
     loginSection.classList.remove("hidden");
     allSections.filter(sec => sec !== loginSection).forEach(sec => sec.classList.add("hidden"));
 });
